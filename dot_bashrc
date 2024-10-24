@@ -1,0 +1,156 @@
+# shellcheck disable=SC2148 # This file shouldn't contain shebang
+###################
+# Start SSH agent #
+###################
+if ! pgrep -u "$USER" ssh-agent >/dev/null; then
+        ssh-agent >~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+        # shellcheck disable=SC2046 # This will value never have spaces
+        eval $(<~/.ssh-agent-thing)
+fi
+
+#################################################
+# If not running interactively, do nothing more #
+#################################################
+[[ $- != *i* ]] && return
+
+##########################
+# Linux distro detection #
+##########################
+[[ -f /etc/arch-release ]] && export DISTRO=arch
+[[ -f /etc/debian_version ]] && export DISTRO=debian
+
+###################
+# History options #
+###################
+# Don't put duplicate lines or the ones starting with a space.
+# Debian .bashrc tells about ignorespace overwrite Midnight Comander's
+# setting of `ignorespace'. Anyway I've set it to ignoreboth. More info
+# in bash(1).
+export HISTCONTROL=ignoreboth
+# Append to the history file, don't overwrite it
+shopt -s histappend
+# Autosave command history after each command execution
+shopt -s histappend
+[[ "${PROMPT_COMMAND}" ]] && PROMPT_COMMAND="$PROMPT_COMMAND;history -a" || PROMPT_COMMAND="history -a"
+# Number of commands loaded into memory in the current session
+export HISTSIZE=5000
+# Total number of commands stored in .bash_history
+export HISTFILESIZE=10000
+
+########
+# Misc #
+########
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+# Extend less to be extremely more functional. See lesspipe(1)
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# Git bash completion
+# shellcheck disable=SC1091
+[[ -f /usr/share/git/completion/git-completion.bash ]] && source /usr/share/git/completion/git-completion.bash
+# Set default editor to vim
+export EDITOR=/usr/bin/vim
+# Auto "cd" when entering just a path
+shopt -s autocd
+
+#############
+# Constants #
+#############
+# I separated constants into a different file for better maintainability
+if [ -f ~/.bash_constants ]; then
+        # shellcheck disable=SC1090
+        . ~/.bash_constants
+fi
+
+###########
+# Aliases #
+###########
+# I separated aliases into a different file for better maintainability
+if [ -f ~/.bash_aliases ]; then
+        # shellcheck disable=SC1090
+        . ~/.bash_aliases
+fi
+
+#############
+# Functions #
+#############
+# I separated functions into a different file for better maintainability
+if [ -f ~/.bash_functions ]; then
+        # shellcheck disable=SC1090
+        source ~/.bash_functions
+fi
+
+# En caso de tener audio distorsionado en Skype,
+# descomentar esta línea
+# PULSE_LATENCY_MSEC=60
+
+#########
+# PATHs #
+#########
+# Add local bin directory to path
+[[ -d ~/bin ]] && export PATH+=":~/bin"
+# Splunk configuration
+[[ -d ~/lab/splunk ]] && export SPLUNK_HOME="${HOME}/lab/splunk"
+[[ -d ~/lab/splunk ]] && export PATH+=":~/lab/splunk/bin"
+
+#######################
+# Audio configuration #
+#######################
+# En caso de tener audio distorsionado en Skype, descomentar esta línea
+# PULSE_LATENCY_MSEC=60
+# PATHs for VST
+[[ -d /usr/lib/vst ]] && export VST_PATH="/usr/lib/vst"
+[[ -d /usr/local/lib/vst ]] && export VST_PATH+=":/usr/local/lib/vst"
+[[ -d ~/.vst ]] && export VST_PATH+=":~/.vst"
+# PATHs for LADSPA
+[[ -d /usr/lib/ladspa ]] && export LADSPA_PATH="/usr/lib/ladspa"
+[[ -d /usr/local/lib/ladspa ]] && export LADSPA_PATH+=":/usr/local/lib/ladspa"
+[[ -d ~/.ladspa ]] && export LADSPA_PATH+=":~/.ladspa"
+# PATHs for LV2
+[[ -d /usr/lib/lv2 ]] && export LV2_PATH="/usr/lib/lv2"
+[[ -d /usr/local/lib/lv2 ]] && export LV2_PATH+=":/usr/local/lib/lv2"
+[[ -d ~/.lv2 ]] && export LV2_PATH+=":~/.lv2"
+# PATHs for DSSI
+[[ -d /usr/lib/dssi ]] && export DSSI_PATH="/usr/lib/dssi"
+[[ -d /usr/local/lib/dssi ]] && export DSSI_PATH+=":/usr/local/lib/dssi"
+[[ -d ~/.dssi ]] && export DSSI_PATH+=":~/.dssi"
+
+###########################
+# Animals in the terminal #
+###########################
+# Disabled for now. I need to clone the repository in https://github.com/ivolo/animals and deploy my own server
+#wget -q --tries=1 --timeout=2 -O /dev/null http://nmcheck.gnome.org/check_network_status.txt && [[ -f /usr/bin/curl ]] && echo -e "\n$(curl -s http://animals.ivolo.me)\n"
+
+##################
+# Regular prompt #
+##################
+# Regular prompt
+PS1="\$(RC=\$?; if [[ \$RC == 0 ]]; then echo \"\[\033[0;32m\]✔\"; else echo \"\[\033[01;37m\]\$RC \[\033[0;31m\]✘\"; fi) $(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; elif [[ $(id) =~ (wheel|sudo) ]]; then echo '\[\033[1;33m\]\u\[\033[0;32m\]@\h'; else echo '\[\033[0;32m\]\u@\h'; fi)\[\033[01;34m\] \w \$\[\033[00m\] "
+# Add user@host when in xterm
+PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+
+##############
+# git prompt #
+##############
+if [[ -d ~/.bash-git-prompt ]]; then
+        # Set config variables first
+        # shellcheck disable=SC2034
+        GIT_PROMPT_ONLY_IN_REPO=1
+        # GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+        # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+        # GIT_PROMPT_START=...    # uncomment for custom prompt start sequence
+        # as last entry source the gitprompt script
+        # shellcheck source=/dev/null
+        source ~/.bash-git-prompt/gitprompt.sh
+fi
+
+#######
+# FZF #
+#######
+# shellcheck disable=SC1091
+source /usr/share/fzf/key-bindings.bash
+# shellcheck disable=SC1091
+source /usr/share/fzf/completion.bash

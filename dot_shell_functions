@@ -1,0 +1,178 @@
+# shellcheck disable=SC2148 # This file shouldn't contain shebang
+########################
+# Extract files easily #
+########################
+function extract() {
+	local c e i
+
+	(($#)) || return
+
+	for i; do
+		c=''
+		e=1
+
+		if [[ ! -r $i ]]; then
+			echo "$0: file is unreadable: \`$i'" >&2
+			continue
+		fi
+
+		# shellcheck disable=SC2049
+		if [[ $i =~ t(ar.)?(gz|xz|bz(2)?) ]]; then
+			c=(tar xvf)
+		elif [[ $i =~ *.7z ]]; then
+			c=(7z x)
+		elif [[ $i =~ *.z ]]; then
+			c=(uncompress)
+		elif [[ $i =~ +.bz2 ]]; then
+			c=(bunzip2)
+		elif [[ $i =~ *.exe ]]; then
+			c=(cabextract)
+		elif [[ $i =~ *.gz ]]; then
+			c=(gunzip)
+		elif [[ $i =~ *.rar ]]; then
+			c=(unrar)
+		elif [[ $i =~ *.xz ]]; then
+			c=(unxz)
+		elif [[ $i =~ *.zip ]]; then
+			c=(unzip)
+		else
+			echo "$0: unrecognized file extension: \`$i'" >&2
+		fi
+
+		command "${c[@]}" "$i"
+		((e = e || $?))
+	done
+	return "$e"
+}
+
+################################
+# cd and ls into the directory #
+################################
+function cls() {
+	local dir="$1"
+	local dir="${dir:=$HOME}"
+	if [[ -d "$dir" ]]; then
+		cd "$dir" || return 1
+		ls -hall
+	else
+		echo "bash: cls: $dir: Directory not found"
+	fi
+}
+
+#######################
+# Show IP information #
+#######################
+function ipinf() {
+	local ipadd
+	local ipawk
+
+	if grep -P "(([1-9]\d{0,2})\.){3}(?2)" <<<"$1"; then
+		curl ipinfo.io/"$1"
+	else
+		ipadd=$(host "$1") &&
+			ipawk=$(awk '{ print $4 }' <<<"$ipadd")
+		curl ipinfo.io/"$ipawk"
+	fi
+	echo
+}
+
+###################
+# Update packages #
+###################
+function sysupdate() {
+	if [[ -z $DISTRO ]]; then
+		echo -e "ERROR: I couldn't check the distro"
+		return 1
+	fi
+
+	if [[ $DISTRO = "arch" ]]; then
+		# Update pacman keyring to the latest version
+		sudo pacman --needed --noconfirm -Sy archlinux-keyring
+		# Chek if yaourt is available. If not, use pacman
+		if command -v yay >/dev/null; then
+			yay -Syu
+		else
+			sudo pacman -Syu
+		fi
+	elif [[ $DISTRO = "debian" ]]; then
+		sudo apt-get update
+		sudo apt-get --assume-yes upgrade
+		# Check if software is pending to be deleted
+		if ! sudo apt-get --assume-no autoremove >/dev/null; then
+			echo "Deleting not needed software."
+			sudo apt-get --assume-yes autoremove
+		fi
+	else
+		echo "ERROR: I don't know this distro :-("
+	fi
+}
+
+###########################
+# Remove orphans packages #
+###########################
+function orphans() {
+	[[ -z $DISTRO ]] && echo -e "ERROR: I couldn't check the distro" && return 1
+	if [[ $DISTRO = "arch" ]]; then
+		if [[ -z $(pacman -Qdt) ]]; then
+			echo no orphans to remove
+		else
+			# shellcheck disable=2046
+			sudo pacman -Rs $(pacman -Qdtq)
+		fi
+	elif [[ $DISTRO = "debian" ]]; then
+		sudo apt-get autoremove
+	else
+		echo "ERROR: I don't know this distro :-("
+	fi
+}
+
+######################
+# password generator #
+######################
+function genpasswd() {
+	local length=$1
+	[[ -z $length ]] && length=16
+	tr -dc A-Za-z0-9_ </dev/urandom | head -c "${length}" | xargs
+}
+
+####################
+# set 'man' colors #
+####################
+function man() {
+	env \
+		LESS_TERMCAP_mb=$'\e[01;31m' \
+		LESS_TERMCAP_md=$'\e[01;31m' \
+		LESS_TERMCAP_me=$'\e[0m' \
+		LESS_TERMCAP_se=$'\e[0m' \
+		LESS_TERMCAP_so=$'\e[01;44;33m' \
+		LESS_TERMCAP_ue=$'\e[0m' \
+		LESS_TERMCAP_us=$'\e[01;32m' \
+		man "$@"
+}
+
+###################
+# FZF improvement #
+###################
+function fzf-lovely() {
+
+	if [ "$1" = "h" ]; then
+		# shellcheck disable=SC2016
+		fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
+ 	                echo {} is a binary file ||
+	                 (bat --style=numbers --color=always {} ||
+	                  highlight -O ansi -l {} ||
+	                  coderay {} ||
+	                  rougify {} ||
+	                  cat {}) 2> /dev/null | head -500'
+
+	else
+		# shellcheck disable=SC2016
+		fzf -m --preview '[[ $(file --mime {}) =~ binary ]] &&
+	                         echo {} is a binary file ||
+	                         (bat --style=numbers --color=always {} ||
+	                          highlight -O ansi -l {} ||
+	                          coderay {} ||
+	                          rougify {} ||
+	                          cat {}) 2> /dev/null | head -500'
+	fi
+}

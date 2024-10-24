@@ -1,0 +1,75 @@
+# shellcheck disable=SC2148 # This file shouldn't contain shebang
+################
+# Some symbols #
+################
+[[ -z $ERRMark ]] && readonly ERRMark='\342\234\227'
+[[ -z $OKMark ]] && readonly OKMark='\342\234\223'
+
+##################
+# Colors in bash #
+##################
+# Reset
+[[ -z $Color_Off ]] && readonly Color_Off='\e[0m' # Text Reset
+# Regular Colors
+[[ -z $Black ]] && Black='\e[0;30m'   # Black
+[[ -z $Red ]] && Red='\e[0;31m'       # Red
+[[ -z $Green ]] && Green='\e[0;32m'   # Green
+[[ -z $Yellow ]] && Yellow='\e[0;33m' # Yellow
+[[ -z $Blue ]] && Blue='\e[0;34m'     # Blue
+[[ -z $Purple ]] && Purple='\e[0;35m' # Purple
+[[ -z $Cyan ]] && Cyan='\e[0;36m'     # Cyan
+[[ -z $White ]] && White='\e[0;37m'   # White
+# Bold
+[[ -z $BBlack ]] && readonly BBlack='\e[1;30m'   # Black
+[[ -z $BRed ]] && readonly BRed='\e[1;31m'       # Red
+[[ -z $BGreen ]] && readonly BGreen='\e[1;32m'   # Green
+[[ -z $BYellow ]] && readonly BYellow='\e[1;33m' # Yellow
+[[ -z $BBlue ]] && readonly BBlue='\e[1;34m'     # Blue
+[[ -z $BPurple ]] && readonly BPurple='\e[1;35m' # Purple
+[[ -z $BCyan ]] && readonly BCyan='\e[1;36m'     # Cyan
+[[ -z $BWhite ]] && readonly BWhite='\e[1;37m'   # White
+# Underline
+[[ -z $UBlack ]] && readonly UBlack='\e[4;30m'   # Black
+[[ -z $URed ]] && readonly URed='\e[4;31m'       # Red
+[[ -z $UGreen ]] && readonly UGreen='\e[4;32m'   # Green
+[[ -z $UYellow ]] && readonly UYellow='\e[4;33m' # Yellow
+[[ -z $UBlue ]] && readonly UBlue='\e[4;34m'     # Blue
+[[ -z $UPurple ]] && readonly UPurple='\e[4;35m' # Purple
+[[ -z $UCyan ]] && readonly UCyan='\e[4;36m'     # Cyan
+[[ -z $UWhite ]] && readonly UWhite='\e[4;37m'   # White
+# Background
+[[ -z $On_Black ]] && readonly On_Black='\e[40m'   # Black
+[[ -z $On_Red ]] && readonly On_Red='\e[41m'       # Red
+[[ -z $On_Green ]] && readonly On_Green='\e[42m'   # Green
+[[ -z $On_Yellow ]] && readonly On_Yellow='\e[43m' # Yellow
+[[ -z $On_Blue ]] && readonly On_Blue='\e[44m'     # Blue
+[[ -z $On_Purple ]] && readonly On_Purple='\e[45m' # Purple
+[[ -z $On_Cyan ]] && readonly On_Cyan='\e[46m'     # Cyan
+[[ -z $On_White ]] && readonly On_White='\e[47m'   # White
+# High Intensity
+[[ -z $IBlack ]] && readonly IBlack='\e[0;90m'   # Black
+[[ -z $IRed ]] && readonly IRed='\e[0;91m'       # Red
+[[ -z $IGreen ]] && readonly IGreen='\e[0;92m'   # Green
+[[ -z $IYellow ]] && readonly IYellow='\e[0;93m' # Yellow
+[[ -z $IBlue ]] && readonly IBlue='\e[0;94m'     # Blue
+[[ -z $IPurple ]] && readonly IPurple='\e[0;95m' # Purple
+[[ -z $ICyan ]] && readonly ICyan='\e[0;96m'     # Cyan
+[[ -z $IWhite ]] && readonly IWhite='\e[0;97m'   # White
+# Bold High Intensity
+[[ -z $BIBlack ]] && readonly BIBlack='\e[1;90m'   # Black
+[[ -z $BIRed ]] && readonly BIRed='\e[1;91m'       # Red
+[[ -z $BIGreen ]] && readonly BIGreen='\e[1;92m'   # Green
+[[ -z $BIYellow ]] && readonly BIYellow='\e[1;93m' # Yellow
+[[ -z $BIBlue ]] && readonly BIBlue='\e[1;94m'     # Blue
+[[ -z $BIPurple ]] && readonly BIPurple='\e[1;95m' # Purple
+[[ -z $BICyan ]] && readonly BICyan='\e[1;96m'     # Cyan
+[[ -z $BIWhite ]] && readonly BIWhite='\e[1;97m'   # White
+# High Intensity backgrounds
+[[ -z $On_IBlack ]] && readonly On_IBlack='\e[0;100m'   # Black
+[[ -z $On_IRed ]] && readonly On_IRed='\e[0;101m'       # Red
+[[ -z $On_IGreen ]] && readonly On_IGreen='\e[0;102m'   # Green
+[[ -z $On_IYellow ]] && readonly On_IYellow='\e[0;103m' # Yellow
+[[ -z $On_IBlue ]] && readonly On_IBlue='\e[0;104m'     # Blue
+[[ -z $On_IPurple ]] && readonly On_IPurple='\e[0;105m' # Purple
+[[ -z $On_ICyan ]] && readonly On_ICyan='\e[0;106m'     # Cyan
+[[ -z $On_IWhite ]] && readonly On_IWhite='\e[0;107m'   # White

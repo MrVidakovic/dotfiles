@@ -1,0 +1,44 @@
+# shellcheck disable=SC2148 # This file shouldn't contain shebang
+# Basic aliases
+alias vi='vim -p' # To speed up vim start time, use -X
+alias view='vim -M'
+alias sudo='sudo ' # Allow aliases to be passed to sudo
+
+# Add color to basic commands
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Usefull ls aliases
+if command -v lsd >/dev/null; then
+    alias ls='lsd --group-dirs=first'
+    alias ll="lsd -lh --group-dirs=first"
+    alias la="lsd -lAh --group-dirs=first"
+else
+    alias ls='ls --color=auto'
+    alias ll="ls -lh"
+    alias la="ls -lAh"
+fi
+# substitude cat with bat
+if command -v bat >/dev/null; then
+    alias cat='bat'
+fi
+
+# When you forget sudo
+alias fuck='sudo $(history -p \!\!)'
+
+# Arch specific aliases
+alias update-repos='sudo reflector --verbose --latest 20 --protocol https --save /etc/pacman.d/mirrorlist'
+alias clean-orphans="/usr/bin/pacman -Qtdq > /dev/null && sudo /usr/bin/pacman -Rns \$(/usr/bin/pacman -Qtdq | sed -e ':a;N;\$!ba;s/\n/ /g')"
+# Add GPG keys to local store for AUR file verification
+alias add-gpg-key='echo "En caso de problemas con la clave pública, ejecutar: gpg --edit-key <clave> y otorgar el mayor nivel de confianza"; gpg --keyserver pgp.mit.edu --recv-keys'
+# Search for new configuration files
+alias search-new-config-files='locate -e --regex "\.pac(new|orig|save)$"'
+
+# Local specific alias (not intended to be stored in a repository
+# shellcheck disable=SC1090
+if [ -f ~/.local_aliases ]; then
+    . ~/.local_aliases
+fi

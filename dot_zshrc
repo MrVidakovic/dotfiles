@@ -1,0 +1,118 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Initialize the GPG ssh-agent
+export GPG_TTY=$TTY
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# History configuration
+setopt histignorealldups sharehistory
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTFILE=~/.zsh_history
+# Number of commands loaded into memory in the current session
+HISTSIZE=5000
+# Total number of commands stored in ~/.zsh_history:
+SAVEHIST=10000
+
+# Enable comments in interactive shells like in sh, ksh, bash, etc.
+setopt interactivecomments
+
+# make less more friendly for non-text input files, see lesspipe(1)
+if command -v lesspipe.sh >/dev/null; then
+    LESSOPEN="|/usr/bin/lesspipe.sh %s"
+    export LESSOPEN
+fi
+LESS=' -R '
+export LESS
+
+# Set default editor to vim
+export EDITOR=/usr/bin/vim
+
+##########################
+# Linux distro detection #
+##########################
+if [ -f /etc/arch-release ]; then
+    export DISTRO=arch
+elif [ -f /etc/debian_version ]; then
+    export DISTRO=debian
+fi
+
+#############
+# Constants #
+#############
+# I separated constants into a different file for better maintainability
+if [ -f ~/.shell_constants ]; then
+    . ~/.shell_constants
+fi
+
+###########
+# Aliases #
+###########
+# I separated aliases into a different file for better maintainability
+if [ -f ~/.shell_aliases ]; then
+    # shellcheck disable=SC1090
+    . ~/.shell_aliases
+fi
+
+#############
+# Functions #
+#############
+# I separated functions into a different file for better maintainability
+if [ -f ~/.shell_functions ]; then
+    # shellcheck disable=SC1090
+    source ~/.shell_functions
+fi
+
+# Use modern completion system
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand_alias _expand _complete _extensions _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+# Plugins
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+    source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+if [ -f /usr/share/zsh-sudo/sudo.plugin.zsh ]; then
+    source /usr/share/zsh-sudo/sudo.plugin.zsh
+fi
+
+#######
+# FZF #
+#######
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+    source /usr/share/fzf/key-bindings.zsh
+fi
+if [ -f /usr/share/fzf/completion.zsh ]; then
+    source /usr/share/fzf/completion.zsh
+fi
+
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# BEGIN ANSIBLE MANAGED BLOCK
+if [ -f /home/ovidakovic/.gotrendier/connection.sh ]; then
+  source /home/ovidakovic/.gotrendier/connection.sh
+fi
+# END ANSIBLE MANAGED BLOCK
