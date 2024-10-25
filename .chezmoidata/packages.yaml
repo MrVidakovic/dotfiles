@@ -4,6 +4,9 @@ packages:
       - git
       - unzip
       - zstd
+      - adobe-source-code-pro-fonts
+      - ttf-hack-nerd
+      - ttf-google-fonts-git
     shell:
       - fzf
       - lsd
@@ -15,5 +18,18 @@ packages:
       - zsh-completions
       - zsh-syntax-highlighting
       - zsh-autosuggestions
+    kitty:
+      - kitty
+      - kitty-shell-integration
+      - kitty-terminfo
+      - ttf-sourcecodepro-nerd
     gpg:
       - gnupg
+    neovim:
+      - curl
+      - npm
+      - vim
+      - neovim
+      - tree-sitter-cli
+      - python-neovim
+      - ripgrep
