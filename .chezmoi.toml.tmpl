@@ -1,5 +1,7 @@
 {{- $email := promptStringOnce . "email" "Email address" -}}
 
+color = true
+
 [data]
     email = {{ $email | quote }}
 
