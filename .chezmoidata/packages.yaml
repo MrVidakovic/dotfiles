@@ -9,4 +9,11 @@ packages:
       - lsd
       - bat
       - cowsay
-    
+      - zsh
+      - zsh-doc
+      - zsh-theme-powerlevel10k-git
+      - zsh-completions
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+    gpg:
+      - gnupg
