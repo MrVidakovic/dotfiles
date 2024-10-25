@@ -1,0 +1,18 @@
+{{ if eq .chezmoi.osRelease.id "arch" -}}
+#!/usr/bin/env bash
+
+echo "Installing general software"
+yay -S {{ .packages.arch.general | join " " }}
+
+echo "Installing GPG"
+yay -S {{ .packages.arch.gpg | join " " }}
+
+echo "Installing shell related software"
+yay -S {{ .packages.arch.shell | join " " }}
+
+echo "Installing Neovim and related software"
+yay -S {{ .packages.arch.neovim | join " " }}
+
+echo "Installing kitty and related software"
+yay -S {{ .packages.arch.kitty | join " " }}
+{{ end -}}
