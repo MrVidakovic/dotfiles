@@ -1342,10 +1342,12 @@
   typeset -g POWERLEVEL9K_AWS_CLASSES=(
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
+  {{- if eq .chezmoi.username "ovidakovic" }}
       'gotrendier-mgt'  MGT
       'gotrendier-production' PROD
       'gotrendier-staging' STAGING
       'gotrendier-qa' QA
+  {{- end }} 
       '*'       DEFAULT)
   typeset -g POWERLEVEL9K_AWS_DEFAULT_FOREGROUND=208
   # typeset -g POWERLEVEL9K_AWS_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
