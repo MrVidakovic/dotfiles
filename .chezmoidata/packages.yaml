@@ -33,3 +33,6 @@ packages:
       - tree-sitter-cli
       - python-neovim
       - ripgrep
+    hyprland:
+      - hyprland
+      - wofi
