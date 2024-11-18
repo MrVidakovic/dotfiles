@@ -37,3 +37,8 @@ packages:
       - hyprland
       - wofi
       - waybar
+      - hyprshot
+      - hyprpicker
+      - swaync
+      - hyprlock
+      - hypridle
