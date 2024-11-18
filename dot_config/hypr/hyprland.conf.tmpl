@@ -23,7 +23,7 @@
 # See https://wiki.hyprland.org/Configuring/Monitors/
 #monitor=,preferred,auto,auto
 {{- if eq .chezmoi.hostname "homer" }}
-monitor=,preferred,auto,1
+monitor = , preferred , auto , 1, bitdepth, 10
 {{- else }}
 monitor=,preferred,auto,1.2
 {{- end }}
