@@ -36,3 +36,4 @@ packages:
     hyprland:
       - hyprland
       - wofi
+      - waybar

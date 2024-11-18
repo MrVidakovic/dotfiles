@@ -15,4 +15,7 @@ yay -S {{ .packages.arch.neovim | join " " }}
 
 echo "Installing kitty and related software"
 yay -S {{ .packages.arch.kitty | join " " }}
+
+echo "Installing hyprland and related software"
+yay -S {{ .packages.arch.hyprland | join " " }}
 {{ end -}}
