@@ -22,7 +22,7 @@ yay -S {{ .packages.arch.hyprland | join " " }}
 echo "Enable Waybar"
 systemctl --user enable --now waybar.service
 echo "Enable hypridle"
-ystemctl --user enable --now hypridle.service
+systemctl --user enable --now hypridle.service
 
 echo "Configuring UWSM to appear in SDDM"
 {
