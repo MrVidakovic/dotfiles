@@ -19,6 +19,11 @@ yay -S {{ .packages.arch.kitty | join " " }}
 echo "Installing hyprland and related software"
 yay -S {{ .packages.arch.hyprland | join " " }}
 
+echo "Enable Waybar"
+systemctl --user enable --now waybar.service
+echo "Enable hypridle"
+ystemctl --user enable --now hypridle.service
+
 echo "Configuring UWSM to appear in SDDM"
 {
 cat <<EOF
