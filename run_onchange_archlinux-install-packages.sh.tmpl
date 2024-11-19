@@ -18,4 +18,16 @@ yay -S {{ .packages.arch.kitty | join " " }}
 
 echo "Installing hyprland and related software"
 yay -S {{ .packages.arch.hyprland | join " " }}
+
+echo "Configuring UWSM to appear in SDDM"
+{
+cat <<EOF
+[Desktop Entry]
+Name=Hyprland (with UWSM)
+Comment=An intelligent dynamic tiling Wayland compositor
+Exec=uwsm start -N Hyprland -C Hyprland -S -- Hyprland
+DesktopNames=Hyprland
+Type=Application
+EOF
+} | sudo tee /usr/share/wayland-sessions/hyprland-uwsm.desktop > /dev/null
 {{ end -}}
