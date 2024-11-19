@@ -34,6 +34,7 @@ packages:
       - python-neovim
       - ripgrep
     hyprland:
+      - uwsm
       - hyprland
       - wofi
       - waybar
