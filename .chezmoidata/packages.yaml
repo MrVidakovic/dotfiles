@@ -4,6 +4,17 @@ packages:
       - git
       - unzip
       - zstd
+      - lazygit
+      - yazi
+      - jq
+      - p7zip
+      - ffmpegthumbnailer
+      - fd
+      - fzf
+      - poppler
+      - zoxide
+      - imagemagick
+      - chafa
       - adobe-source-code-pro-fonts
       - ttf-hack-nerd
       - ttf-google-fonts-git
