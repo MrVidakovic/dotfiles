@@ -36,6 +36,7 @@ packages:
     hyprland:
       - nm-connection-editor
       - network-manager-applet
+      - blueman
       - uwsm
       - hyprland
       - wofi
