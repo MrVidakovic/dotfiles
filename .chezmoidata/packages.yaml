@@ -34,6 +34,8 @@ packages:
       - python-neovim
       - ripgrep
     hyprland:
+      - nm-connection-editor
+      - network-manager-applet
       - uwsm
       - hyprland
       - wofi
