@@ -267,7 +267,8 @@ bind = $mainMod SHIFT, 0, movetoworkspace, 10
 
 {{- if eq .chezmoi.hostname "ovidakovicnbk" }}
 # Disable notebook monitor
-bind = ,XF86Display, exec, sleep 1 && hyprctl dispatch dpms toggle eDP-1
+bind = ,XF86Display, exec, sleep 1 && hyprctl keyword monitor "eDP-1,disable"
+bind = SHIFT, XF86Display, exec, sleep 1 && hyprctl keyword monitor "eDP-1,enable"
 {{- end }}
 
 # Example special workspace (scratchpad)
