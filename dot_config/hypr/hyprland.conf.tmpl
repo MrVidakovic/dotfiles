@@ -52,7 +52,9 @@ $menu = wofi --show drun
 # exec-once = nm-applet &
 # exec-once = waybar & hyprpaper & firefox
 exec-once = uwsm app -- swaync
+{{- if eq .chezmoi.hostname "ovidakovicnbk" }}
 exec-once = uwsm app -- nm-applet --indicator
+{{- end }}
 
 ################
 ### AUTOSTOP ###
