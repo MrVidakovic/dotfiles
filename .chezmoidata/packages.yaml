@@ -18,6 +18,7 @@ packages:
       - adobe-source-code-pro-fonts
       - ttf-hack-nerd
       - ttf-google-fonts-git
+      - brightnessctl
     shell:
       - fzf
       - lsd
