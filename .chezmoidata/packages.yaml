@@ -18,7 +18,6 @@ packages:
       - adobe-source-code-pro-fonts
       - ttf-hack-nerd
       - ttf-google-fonts-git
-      - brightnessctl
     shell:
       - fzf
       - lsd
@@ -51,6 +50,7 @@ packages:
       - blueman
       - uwsm
       - hyprland
+      - hyprland-qtutils-git
       - wofi
       - waybar
       - hyprshot
@@ -58,3 +58,4 @@ packages:
       - swaync
       - hyprlock
       - hypridle
+      - brightnessctl
