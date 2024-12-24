@@ -50,7 +50,7 @@ packages:
       - blueman
       - uwsm
       - hyprland
-      - hyprland-qtutils-git
+      - hyprland-qtutils
       - wofi
       - waybar
       - hyprshot
