@@ -51,6 +51,7 @@ $menu = wofi --show drun
 # exec-once = $terminal
 # exec-once = nm-applet &
 # exec-once = waybar & hyprpaper & firefox
+exec-once = uwsm app -- clipse -listen
 exec-once = uwsm app -- swaync
 exec-once = uwsm app -- blueman-applet
 {{- if eq .chezmoi.hostname "ovidakovicnbk" }}
@@ -237,6 +238,9 @@ bind = $mainMod, J, togglesplit, # dwindle
 bind = $mainMod, S, exec, hyprshot -m window
 bind = $mainMod SHIFT, S, exec, hyprshot -m region
 
+# Clipse keyboard manager invocation
+bind = SUPER, V, exec, kitty --app-id clipse clipse
+
 # Invoke screen lock
 bind = SUPER_CTRL, l, exec, hyprlock
 
@@ -313,6 +317,10 @@ bindl = , XF86AudioPrev, exec, playerctl previous
 
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 # See https://wiki.hyprland.org/Configuring/Workspace-Rules/ for workspace rules
+
+# Clipse clipboard manager
+windowrulev2 = float, class:(clipse)
+windowrulev2 = size 622 652, class:(clipse)
 
 # Spotify
 windowrulev2 = workspace 4 silent, class:Spotify
