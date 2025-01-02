@@ -13,7 +13,7 @@
         "hyprland/window"
     ],
     "modules-right": [
-        "mpd",
+        //"mpd",
         "idle_inhibitor",
         "pulseaudio",
         "network",
@@ -23,7 +23,8 @@
         "temperature",
         "backlight",
         "keyboard-state",
-        "sway/language",
+        "hyprland/language",
+        //"sway/language",
         "battery",
         "battery#bat2",
         "clock",
