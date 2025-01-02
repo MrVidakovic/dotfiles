@@ -58,6 +58,12 @@
             "unlocked": ""
         }
     },
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "US",
+        "format-es": "ES",
+        "on-click": "hyprctl switchxkblayout current next"
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -100,11 +106,6 @@
             "activated": "",
             "deactivated": ""
         }
-    },
-    "hyprland/language": {
-        "format": "{}",
-        "format-en": "US",
-        "format-es": "ES"
     },
     "tray": {
         // "icon-size": 21,
