@@ -237,7 +237,11 @@ bind = $mainMod, J, togglesplit, # dwindle
 bind = $mainMod, S, exec, hyprshot -m window
 bind = $mainMod SHIFT, S, exec, hyprshot -m region
 
+# Invoke screen lock
 bind = SUPER_CTRL, l, exec, hyprlock
+
+# Change keyboard layout
+bind = SUPER_CTRL, k, exec, hyprctl switchxkblayout current next
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, h, movefocus, l
