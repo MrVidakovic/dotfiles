@@ -1,0 +1,4 @@
+# Don't upload the clipboard history
+clipboard_history.json
+# Nor temporary files
+tmp_files/
