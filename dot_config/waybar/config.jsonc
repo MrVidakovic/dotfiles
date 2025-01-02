@@ -100,6 +100,11 @@
             "deactivated": ""
         }
     },
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "US",
+        "format-es": "ES"
+    },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
