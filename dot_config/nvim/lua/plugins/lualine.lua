@@ -6,7 +6,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		options = {
-			theme = "tokyonight",
+			theme = "catppuccin",
 		},
 	},
 }
