@@ -1,6 +1,6 @@
 theme:
   activeBorderColor:
-    - '#f4dbd6'
+    - '#f5bde6'
     - bold
   inactiveBorderColor:
     - '#a5adcb'
@@ -11,7 +11,7 @@ theme:
   cherryPickedCommitBgColor:
     - '#494d64'
   cherryPickedCommitFgColor:
-    - '#f4dbd6'
+    - '#f5bde6'
   unstagedChangesColor:
     - '#ed8796'
   defaultFgColor:
