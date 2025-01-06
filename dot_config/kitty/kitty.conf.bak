@@ -320,7 +320,8 @@ mouse_hide_wait 3.0
 #: typing text. Disabled by default on macOS as getting it to work
 #: robustly with the ever-changing sea of bugs that is Cocoa is too
 #: much effort.
-# url_color #61afef
+
+url_color #61afef
 url_style curly
 
 #: The color and style for highlighting URLs on mouse-over. url_style
@@ -599,7 +600,8 @@ visual_bell_duration 0.3
 
 #: Visual bell duration. Flash the screen when a bell occurs for the
 #: specified number of seconds. Set to zero to disable.
-# visual_bell_color #be3232
+
+visual_bell_color #be3232
 #visual_bell_color none
 
 #: The color used by visual bell. Set to none will fall back to
@@ -929,10 +931,10 @@ tab_bar_style powerline
 #: tab_title_template.
 
 # active_tab_foreground   #000
-# active_tab_background   #98c379
+active_tab_background   #98c379
 # active_tab_font_style   bold-italic
-# inactive_tab_foreground #000000
-# inactive_tab_background #e06c75
+inactive_tab_foreground #000000
+inactive_tab_background #e06c75
 # inactive_tab_font_style normal
 
 #: Tab bar colors and styles
@@ -941,7 +943,8 @@ tab_bar_style powerline
 
 #: Background color for the tab bar. Defaults to using the terminal
 #: background color.
-# tab_bar_margin_color black
+
+tab_bar_margin_color black
 
 #: Color for the tab bar margin area. Defaults to using the terminal
 #: background color.
@@ -2067,9 +2070,3 @@ background_opacity 0.95
 
 map ctrl+shift+enter new_window_with_cwd
 map ctrl+shift+t new_tab_with_cwd
-
-
-# BEGIN_KITTY_THEME
-# Catppuccin-Macchiato
-include current-theme.conf
-# END_KITTY_THEME
