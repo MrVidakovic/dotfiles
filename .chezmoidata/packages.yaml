@@ -51,6 +51,8 @@ packages:
       - uwsm
       - hyprland
       - hyprland-qtutils
+      - xdg-desktop-portal
+      - xdg-desktop-portal-hyprland
       - wofi
       - waybar
       - hyprshot
