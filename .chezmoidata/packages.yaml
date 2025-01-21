@@ -53,7 +53,7 @@ packages:
       - hyprland-qtutils
       - xdg-desktop-portal
       - xdg-desktop-portal-hyprland
-      - wofi
+      - fuzzel
       - waybar
       - hyprshot
       - hyprpicker
