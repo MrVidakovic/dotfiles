@@ -23,4 +23,7 @@ echo "Enable Waybar"
 systemctl --user enable --now waybar.service
 echo "Enable hypridle"
 systemctl --user enable --now hypridle.service
+
+echo "Rebuild bat cache"
+bat cache --build
 {{ end -}}
