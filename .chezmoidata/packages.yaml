@@ -63,6 +63,7 @@ packages:
       - swaync
       - hyprlock
       - hypridle
+      - hyprpaper
       - brightnessctl
       - wl-clipboard
       - clipse
