@@ -55,9 +55,6 @@ exec-once = uwsm app -- hyprpaper
 exec-once = uwsm app -- clipse -listen
 exec-once = uwsm app -- swaync
 exec-once = uwsm app -- blueman-applet
-{{- if eq .chezmoi.hostname "ovidakovicnbk" }}
-exec-once = uwsm app -- nm-applet --indicator
-{{- end }}
 
 ################
 ### AUTOSTOP ###
@@ -244,6 +241,9 @@ bind = SUPER, V, exec, kitty --app-id clipse clipse
 
 # Invoke screen lock
 bind = SUPER_CTRL, l, exec, hyprlock
+
+# NetworkManager fuzzel interface
+bind = SUPER_CTRL, n, exec, networkmanager_dmenu
 
 # Change keyboard layout
 bind = SUPER_CTRL, k, exec, hyprctl switchxkblayout current next
