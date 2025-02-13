@@ -25,6 +25,7 @@
 {{- if eq .chezmoi.hostname "homer" }}
 monitor = , preferred , auto , 1, bitdepth, 10
 {{- else }}
+monitor=DP-1,preferred,auto,1.2
 monitor=,preferred,auto,1.0
 {{- end }}
 
