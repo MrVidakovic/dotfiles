@@ -7,6 +7,7 @@ packages:
       - lazygit
       - yazi
       - jq
+      - uv
       - p7zip
       - ffmpegthumbnailer
       - fd
