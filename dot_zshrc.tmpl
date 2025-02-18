@@ -123,6 +123,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 ######################
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
+#################
+# Ad uv to PATH #
+#################
+export PATH=$PATH:
+
 {{- if eq .chezmoi.username "ovidakovic" }}
 # BEGIN ANSIBLE MANAGED BLOCK
 if [ -f /home/ovidakovic/.gotrendier/functions.sh ]; then
