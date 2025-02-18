@@ -16,6 +16,9 @@ yay -S {{ .packages.arch.neovim | join " " }}
 echo "Installing kitty and related software"
 yay -S {{ .packages.arch.kitty | join " " }}
 
+echo "Installing uv managed Python software"
+uv tool install --python 3.12 {{ .packages.arch.python | join " " }}
+
 echo "Installing hyprland and related software"
 yay -S {{ .packages.arch.hyprland | join " " }}
 
