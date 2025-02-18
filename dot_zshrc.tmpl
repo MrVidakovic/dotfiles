@@ -128,8 +128,8 @@ export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p
 #################
 export PATH="/home/{{ .chezmoi.username }}/.local/share/../bin:$PATH"
 
-
 {{- if eq .chezmoi.username "ovidakovic" }}
+
 # BEGIN ANSIBLE MANAGED BLOCK
 if [ -f /home/ovidakovic/.gotrendier/functions.sh ]; then
   source /home/ovidakovic/.gotrendier/functions.sh
