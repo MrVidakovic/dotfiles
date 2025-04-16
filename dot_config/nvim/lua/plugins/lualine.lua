@@ -15,7 +15,7 @@ return {
     }
 	},
 	keys = {
-		{ "<leader>bh", "<cmd>bnext<CR>", desc = "Move to the next buffer" },
-		{ "<leader>bl", "<cmd>bprevious<CR>", desc = "Move to the previous buffer" },
+		{ "<leader>bl", "<cmd>bnext<CR>", desc = "Move to the next buffer" },
+		{ "<leader>bh", "<cmd>bprevious<CR>", desc = "Move to the previous buffer" },
 	},
 }
