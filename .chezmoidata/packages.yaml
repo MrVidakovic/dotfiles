@@ -47,6 +47,7 @@ packages:
       - tree-sitter-cli
       - python-neovim
       - ripgrep
+      - vivify
     hyprland:
       - nm-connection-editor
       - network-manager-applet
