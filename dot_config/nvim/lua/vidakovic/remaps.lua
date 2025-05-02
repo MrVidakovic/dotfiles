@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- Open netrw. Currently disabled in favour of the Snacks file picker
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Move selected block up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
