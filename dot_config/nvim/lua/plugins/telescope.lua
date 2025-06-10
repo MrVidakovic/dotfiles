@@ -22,5 +22,6 @@ return {
 		{ "<leader>pf", "<cmd>Telescope find_files<cr>", desc = "Find file" },
 		{ "<leader>ps", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
 		{ "<C-p>", "<cmd>Telescope git_files<cr>", desc = "Git files" },
+    -- { "<C-d>", function() require('telescope.actions').delete_buffer() end, mode = { "i", "n", "v" }, desc = "Delete selected buffers" },
 	},
 }
